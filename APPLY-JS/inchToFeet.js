@@ -24,3 +24,8 @@ console.log(naniFeet);
 
 var dadiFeet = inchToFeet(300);
 console.log(dadiFeet);
+
+var senior = [156, 288, 300];
+
+var nanaFeet = inchToFeet(senior[1]);
+console.log(nanaFeet);
