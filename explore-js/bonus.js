@@ -30,3 +30,22 @@ console.log('not eating right now');
 
 var result2 = add(144, 568);
 console.log(result2);
+
+function largestNumber(numbers){
+    var larger = numbers[0];
+    for(var i = 0; i < number.length; i++){
+        var element = numbers[i];
+        console.log(element);
+        if(element > larger){
+            larger = element;
+        }
+    }
+    return larger;
+}
+
+var output = largestNumber([45, 78, 89]);
+console.log(output);
+
+var numbers = [98, 68, 23, 10,2];
+var output = largestNumber(numbers);
+console.log(output);
