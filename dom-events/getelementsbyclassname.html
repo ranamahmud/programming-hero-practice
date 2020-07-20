@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore DOM</title>
+    <style>
+        article{
+            border: 2px solid tomato;
+            border-radius: 20px;
+            margin: 5px;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Exploring Dom</h1>
+        <section>
+            <article>
+                <h3>article-3</h3>
+                <p class="author">author-1</p>
+                <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi reiciendis delectus magni quia numquam tempora debitis, repellat architecto ducimus est temporibus quos voluptatum animi tempore ipsum mollitia, perferendis minus ad?</p>
+            </article>
+            <article>
+                <h3>article-3</h3>
+                <p class="author">author-2</p>
+                <p class="description">Nisi minima sequi deserunt animi consequuntur at aliquam veniam nobis labore iure cum magni iusto quae corrupti magnam, quibusdam doloremque aperiam dolore veritatis ducimus explicabo repudiandae est. Officia, placeat voluptate.</p>
+            </article>
+            <article>
+                <h3>article-3</h3>
+                <p class="author">author-3</p>
+                <p class="description">Voluptas, odio quibusdam necessitatibus fugit atque nostrum cum, voluptate, ex quod magnam sint modi! Nemo quos commodi suscipit officiis dolorum voluptatem temporibus facilis molestiae, voluptatum libero exercitationem alias corporis rerum?</p>
+            </article>
+        </section>
+    </main>
+
+    <script>
+        var authors = document.getElementsByClassName('author');
+        
+        for(var i = 0; i < authors.length; i++){
+            var element = authors[i];
+            element.style.backgroundColor = 'lightblue';
+            element.style.margin = '10px';
+            console.log(element);
+            console.log(element.innerHTML);
+            element.innerHTML = 'Lekhok ' + i;
+        }
+    </script>
+</body>
+</html>
