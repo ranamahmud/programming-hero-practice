@@ -1,18 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Event management company</title>
-</head>
-<body>
-    <h1 onclick="alert('hi')">Exploring Events</h1>
 
-    <button onmouseover="handleClick()">Click Me</button>
-    <script>
-        function handleClick() {
-            console.log('Someone clicked me');
-        }
-    </script>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Event management company</title>
+    </head>
+
+    <body>
+        <h1 onclick="alert('hi')">Exploring Events</h1>
+
+        <button>click me-0</button>
+        <button id="second">click me-1</button>
+        <button>click me-2</button>
+        <button id="lastPerson">click me-3</button>
+        <!-- <button onmouseover="handleClick()">Click Me</button> -->
+        <script>
+            // function handleClick() {
+            //     console.log('Someone clicked me');
+            // }
+            function handleClick() {
+                console.log("clicked");
+                document.body.style.backgroundColor = "cyan";
+            }
+            const secondButton = document.getElementById("second");
+            // secondButton.onclick = function () {
+            //     console.log("Second person clicked");
+            // }
+            // secondButton.onclick = handleClick;
+            secondButton.addEventListener('click', function () {
+                document.body.style.backgroundColor = "cyan";
+
+                console.log("Click from event listener");
+            })
+
+            document.getElementById("lastPerson").addEventListener('click',
+                function(){
+                document.body.style.color = 'tomato';
+            })
+        </script>
+    </body>
+
 </html>
