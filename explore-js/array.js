@@ -39,3 +39,12 @@ console.log(friendsAge.length)
 friendsAge.pop()
 console.log(friendsAge);
 
+var names = ["Rana","Rina","Rakhi"];
+var teaLine = ['Palam', 'Kalam', 'Salam','Balam','Jalam','Talam'];
+var part = teaLine.slice(2, 5);
+console.log(part);
+console.log(names);
+console.log(teaLine);
+
+console.log(teaLine.pop())
+console.log(teaLine);
