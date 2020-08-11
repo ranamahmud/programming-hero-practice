@@ -18,17 +18,15 @@
         .then((json) => display(json));
       function display(users) {
         console.log("users", users);
-        const userNames = users.map(user => user.username);
+        const userNames = users.map((user) => user.username);
         console.log(userNames);
         const ul = document.getElementById("users-container");
-        for(let i =0; i<userNames.length; i++){
-            const user = userNames[i];
-            const li = document.createElement("li");
-            li.innerText = user;
-            ul.appendChild(li);
-
+        for (let i = 0; i < userNames.length; i++) {
+          const user = userNames[i];
+          const li = document.createElement("li");
+          li.innerText = user;
+          ul.appendChild(li);
         }
-
       }
     </script>
   </body>
