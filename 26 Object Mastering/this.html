@@ -35,6 +35,10 @@
       add(12, 13);
       anotherObj.sum = add;
       anotherObj.sum(5,2);
+
+      setTimeout(function(){
+          console.log(this);
+      },1000)
     </script>
   </body>
 </html>
