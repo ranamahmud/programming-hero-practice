@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 
 function App() {
@@ -18,6 +18,7 @@ function App() {
         <p>
           I'm a React Person
           </p>
+          <Counter></Counter>
           <ul>
            {
              nayoks.map(nayok =>
@@ -70,4 +71,16 @@ function Person(props) {
   )
 }
 
+function Counter(){
+  const [count, setCount] = useState(0)
+  const handleIncrese = () => setCount(count + 1);
+  return(
+    <div>
+      <h1>Count: {count}</h1>
+      <button onClick={() => setCount(count +- 1)}>Decrease</button>
+
+      <button onClick={() => setCount(count + 1)}>Increase</button>
+    </div>
+  )
+}
 export default App;
