@@ -16,11 +16,28 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Hello World
+          <p>
+          I'm a React Person
+          </p>
+         
         </a>
+        <Person></Person>
+          <Person></Person>
+          <Person></Person>
       </header>
     </div>
   );
+}
+
+function Person(){
+  const personStyle = {
+    border: '2px solid red',
+    margin: '10px'
+  }
+  return (<div style={personStyle}>
+    <h1>Name: Rana</h1>
+  <h3>Hero of the year</h3>
+  </div>)
 }
 
 export default App;
