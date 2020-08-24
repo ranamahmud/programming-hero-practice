@@ -2,10 +2,15 @@ import React from 'react';
 import './App.css';
 
 function App() {
-  const nayoks = ['Anwar', 'Jafor', 'Alamgir', 'Salman']
+  const nayoks = ['Razzak', 'Jasim', 'Alamgir', 'Salman',
+'Shuvo']
   const products = [{ name: 'Photoshop', price: '$90.99' },
   { name: 'Illustrator', price: '$60.99' },
   { name: 'PDF Reader', price: '$6.99' }]
+  const  productNames = products.map(product => product.name)
+  console.log(productNames);
+  const nayokNames = nayoks.map(nayok => nayok)
+  console.log(nayokNames);
   return (
     <div className="App">
       <header className="App-header">
@@ -13,12 +18,24 @@ function App() {
         <p>
           I'm a React Person
           </p>
-        {/* <Product name={products[0].name} price={products[0].price}></Product>
-        <Product name={products[1].name} price={products[1].price}></Product> */}
-        <Product product={products[0]}></Product>
-        <Product product={products[1]}></Product>
+          <ul>
+           {
+             nayoks.map(nayok =>
+              <li>{nayok}</li>
+              )
+           }
+           {
+             products.map(product =>
+              <li>{product.name}</li>)
+           }
+          </ul>
+          {
+            products.map(product =>
+              <Product product={product}></Product>)
+          }
+      
         <Person name="Munna" job="football"></Person>
-        <Person name="Massum" job="Dorshok"></Person>
+        <Person name="Masum" job="Dorshok"></Person>
       </header>
 
 
