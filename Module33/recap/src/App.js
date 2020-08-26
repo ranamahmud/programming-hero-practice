@@ -3,17 +3,20 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  const nayoks = ['Jasim', 'Deepjol', 'BappaRaz']
+  const nayoks = [{name:'Jasim',age:56},
+  { name:'Deepjol',age:61},
+  { name:'BappaRaz',age:15},
+  {name:'Omar Sani',age:23},
+  {name:'Alamgir',age:32}]
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
 
         <MovieCounter></MovieCounter>
-        <Nayok name={nayoks[0]} age="56"></Nayok>
-        <Nayok name={nayoks[1]}></Nayok>
-        <Nayok></Nayok>
-        <Nayok></Nayok>
+        {
+          nayoks.map(nk=> <Nayok name={nk.name} age={nk.age}></Nayok>)
+        }
 
       </header>
     </div>
