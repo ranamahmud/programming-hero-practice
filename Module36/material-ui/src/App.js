@@ -6,7 +6,7 @@ import News from './Components/News/News';
 function App() {
   const [articles, setArticles] = useState([])
   useEffect(() => {
-    const url = 'https://newsapi.org/v2/top-headlines?country=us&apiKey=';
+    const url = 'https://newsapi.org/v2/top-headlines?country=us&apiKey=23b987fb124b4d2e94a17baf6ced6d9e';
     fetch(url)
       .then(response => response.json())
       .then(data => setArticles(data.articles))
