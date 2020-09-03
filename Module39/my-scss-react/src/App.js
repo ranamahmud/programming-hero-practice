@@ -13,7 +13,7 @@ function App() {
   return (
     <CategoryContext.Provider value={count}>
       <p>Count value: {count}</p>
-      <Header count={count} setCount={setCount}></Header>
+      <Header setCount={setCount}></Header>
       <Home></Home>
       <Shipment></Shipment>
     </CategoryContext.Provider>
