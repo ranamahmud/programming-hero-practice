@@ -3,8 +3,7 @@ import { useContext , createContext} from 'react';
 import { CategoryContext } from '../../App';
 
 const Header = (props) => {
-    const {setCount} = props;
-    const category = useContext(CategoryContext);
+    const [category, setCount] = useContext(CategoryContext);
     return (
         <div>
             <h1>This is header: {category}</h1>
