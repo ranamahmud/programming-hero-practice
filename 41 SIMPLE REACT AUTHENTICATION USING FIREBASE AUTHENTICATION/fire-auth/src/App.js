@@ -7,13 +7,14 @@ import { useState } from 'react';
 
 firebase.initializeApp(firebaseConfig);
 function App() {
+  const [newUser, setNewUser] = useState(false);
   const [user, setUser] = useState({
     isSignedIn: false,
     name: '',
     email: '',
     photoURL: '',
-    error:'',
-    success:false
+    error: '',
+    success: false
   })
   const provider = new firebase.auth.GoogleAuthProvider();
   const handleSignIn = () => {
@@ -78,30 +79,57 @@ function App() {
   }
 
   const handleSubmit = (e) => {
-    if (user.email && user.password) {
-      console.log('submitting');
+    if (newUser && user.email && user.password) {
       firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
         .then(res => {
-          console.log(res);
           const newUserInfo = { ...user };
           newUserInfo.error = '';
           newUserInfo.success = true;
           setUser(newUserInfo);
+          updateUserName(user.email);
         })
         .catch(function (error) {
           // Handle Errors here.
           const newUserInfo = { ...user };
-          var errorCode = error.code;
-          var errorMessage = error.message;
+
           newUserInfo.error = error.message;
           newUserInfo.success = false;
           setUser(newUserInfo);
-          console.log(errorCode);
-          console.log(errorMessage);
+
+        });
+    }
+
+    if (!newUser && user.email && user.password) {
+      firebase.auth().signInWithEmailAndPassword(user.email, user.password)
+        .then(res => {
+          const newUserInfo = { ...user };
+          newUserInfo.error = '';
+          newUserInfo.success = true;
+          setUser(newUserInfo);
+          console.log('Sign in user info', user.name);
+        })
+        .catch(function (error) {
+          // Handle Errors here.
+          const newUserInfo = { ...user };
+          newUserInfo.error = error.message;
+          newUserInfo.success = false;
+          setUser(newUserInfo);
         });
     }
     e.preventDefault();
 
+  }
+
+  const updateUserName = name => {
+    let user = firebase.auth().currentUser;
+
+    user.updateProfile({
+      displayName: name
+    }).then(function () {
+      console.log('User name updated successfully');
+    }).catch(function (error) {
+      console.log(error);
+    });
   }
   return (
     <div className="App">
@@ -121,19 +149,24 @@ function App() {
       }
 
       <h1>Our own Authentication</h1>
+      <input type="checkbox" onChange={() => setNewUser(!newUser)} name="newUser" id="" />
+      <label htmlFor="newUser">New User Sign Up</label>
+
       <form onSubmit={handleSubmit}>
-        <input type="text" name="name" onBlur={handleBlur} id="" placeholder="Your name" required />
+        {
+          newUser && <input type="text" name="name" onBlur={handleBlur} id="" placeholder="Your name" required />
+        }
         <br />
         <input type="text" name="email" onBlur={handleBlur} placeholder="Your email address" required />
         <br />
         <input type="password" name="password" onBlur={handleBlur} placeholder="Password" required />
         <br />
-        <input type="submit" value="Submit" />
+        <input type="submit" value={newUser?"Sign Up":"Sign In"} />
       </form>
       <p style={{ color: 'red' }}>{user.error}</p>
       {
-        user.success && 
-        <p style={{ color: 'green' }}>User  created successfully</p>
+        user.success &&
+        <p style={{ color: 'green' }}>User  {newUser ? 'craeted' : 'Logged in'} successfully</p>
       }
     </div>
   );
