@@ -12,6 +12,8 @@ function App() {
     name: '',
     email: '',
     photoURL: '',
+    error:'',
+    success:false
   })
   const provider = new firebase.auth.GoogleAuthProvider();
   const handleSignIn = () => {
@@ -43,7 +45,8 @@ function App() {
           isSignedIn: false,
           name: '',
           photoURL: '',
-          email: ''
+          email: '',
+          password: '',
         }
 
         setUser(signedOutUser);
@@ -52,12 +55,60 @@ function App() {
 
       });
   }
+
+
+  const handleBlur = (e) => {
+    let isFieldValid = true;
+    console.log(e.target.name);
+    console.log(e.target.value);
+
+    if (e.target.name === 'email') {
+      isFieldValid = /\S+@\S+\.\S+/.test(e.target.value);
+    }
+    if (e.target.name === 'password') {
+      const isPasswordValid = e.target.value.length > 6;
+      const passwordHasNumber = /\d{1}/.test(e.target.value);
+      isFieldValid = isPasswordValid && passwordHasNumber;
+    }
+    if (isFieldValid) {
+      const newUserInfo = { ...user };
+      newUserInfo[e.target.name] = e.target.value;
+      setUser(newUserInfo);
+    }
+  }
+
+  const handleSubmit = (e) => {
+    if (user.email && user.password) {
+      console.log('submitting');
+      firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
+        .then(res => {
+          console.log(res);
+          const newUserInfo = { ...user };
+          newUserInfo.error = '';
+          newUserInfo.success = true;
+          setUser(newUserInfo);
+        })
+        .catch(function (error) {
+          // Handle Errors here.
+          const newUserInfo = { ...user };
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          newUserInfo.error = error.message;
+          newUserInfo.success = false;
+          setUser(newUserInfo);
+          console.log(errorCode);
+          console.log(errorMessage);
+        });
+    }
+    e.preventDefault();
+
+  }
   return (
     <div className="App">
       {
-        user.isSignedIn === true ? 
-          <button onClick={handleSignOut}>Sign Out</button>:
-          <button onClick={handleSignIn}>Sign in</button> 
+        user.isSignedIn === true ?
+          <button onClick={handleSignOut}>Sign Out</button> :
+          <button onClick={handleSignIn}>Sign in</button>
 
       }
       {
@@ -67,6 +118,22 @@ function App() {
           <p>Your email: {user.email}</p>
           <img src={user.photo} alt="" />
         </div>
+      }
+
+      <h1>Our own Authentication</h1>
+      <form onSubmit={handleSubmit}>
+        <input type="text" name="name" onBlur={handleBlur} id="" placeholder="Your name" required />
+        <br />
+        <input type="text" name="email" onBlur={handleBlur} placeholder="Your email address" required />
+        <br />
+        <input type="password" name="password" onBlur={handleBlur} placeholder="Password" required />
+        <br />
+        <input type="submit" value="Submit" />
+      </form>
+      <p style={{ color: 'red' }}>{user.error}</p>
+      {
+        user.success && 
+        <p style={{ color: 'green' }}>User  created successfully</p>
       }
     </div>
   );
