@@ -16,10 +16,12 @@ function App() {
     error: '',
     success: false
   })
-  const provider = new firebase.auth.GoogleAuthProvider();
+  const googleProvider = new firebase.auth.GoogleAuthProvider();
+  const fbProvider = new firebase.auth.FacebookAuthProvider();
+
   const handleSignIn = () => {
 
-    firebase.auth().signInWithPopup(provider).then(function (result) {
+    firebase.auth().signInWithPopup(googleProvider).then(function (result) {
       // This gives you a Google Access Token. You can use it to access the Google API.
       var token = result.credential.accessToken;
       // The signed-in user info.
@@ -37,7 +39,25 @@ function App() {
       console.log(err.message);
     })
   }
-
+  const handleFbSignIn = () => {
+    firebase.auth().signInWithPopup(fbProvider).then(function (result) {
+      // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+      var token = result.credential.accessToken;
+      // The signed-in user info.
+      var user = result.user;
+      console.log('fb user after signin', user);
+      // ...
+    }).catch(function (error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // The email of the user's account used.
+      var email = error.email;
+      // The firebase.auth.AuthCredential type that was used.
+      var credential = error.credential;
+      // ...
+    });
+  }
   const handleSignOut = () => {
     console.log("signOut");
     firebase.auth().signOut()
@@ -139,6 +159,8 @@ function App() {
           <button onClick={handleSignIn}>Sign in</button>
 
       }
+      <br />
+      <button onClick={handleFbSignIn}>Sign in Using Facebook</button>
       {
         user.isSignedIn &&
         <div>
@@ -161,7 +183,7 @@ function App() {
         <br />
         <input type="password" name="password" onBlur={handleBlur} placeholder="Password" required />
         <br />
-        <input type="submit" value={newUser?"Sign Up":"Sign In"} />
+        <input type="submit" value={newUser ? "Sign Up" : "Sign In"} />
       </form>
       <p style={{ color: 'red' }}>{user.error}</p>
       {
