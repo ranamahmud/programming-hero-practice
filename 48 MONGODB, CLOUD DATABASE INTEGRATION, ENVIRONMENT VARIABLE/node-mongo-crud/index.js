@@ -36,6 +36,13 @@ client.connect(err => {
                 res.send(documents);
             })
     })
+
+    app.get('/product/:id', (req, res) => {
+        ProductCollection.find({ _id: ObjectId(req.params.id) })
+            .toArray((err, documents) => {
+                res.send(documents[0])
+            })
+    })
     console.log("database connected")
     // perform actions on the collection object
     // const product = { name: "modhu", price: 25, quantity: 20 };
@@ -49,7 +56,6 @@ client.connect(err => {
     })
 
     app.delete("/delete/:id", (req, res) => {
-        console.log(req.params.id);
 
         ProductCollection.deleteOne({ _id: ObjectId(req.params.id) })
             .then((result) => {
@@ -57,6 +63,19 @@ client.connect(err => {
             })
     })
 
+
+    app.patch("/update/:id", (req, res) => {
+        console.log(req.body.price)
+        ProductCollection.updateOne({ _id: ObjectId(req.params.id) },
+
+            {
+                $set: { price: req.body.price, quantity: req.body.quantity },
+                $currentDate: { lastModified: true }
+            })
+            .then((result) => {
+                console.log(result)
+            })
+    })
     // client.close();
 });
 
