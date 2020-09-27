@@ -1,3 +1,5 @@
 .history/
 .ipynb_checkpoints
 .node_modules
+
+/47 NODE,Exprress,GET API,POST API,POSTMAN/node-mongo/node_modules
