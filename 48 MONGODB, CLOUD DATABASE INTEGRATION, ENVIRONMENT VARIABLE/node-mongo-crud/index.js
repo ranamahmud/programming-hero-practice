@@ -51,7 +51,7 @@ client.connect(err => {
         ProductCollection.insertOne(product)
             .then(result => {
                 console.log("Data added successfully")
-                res.send('success');
+                res.redirect("/")
             })
     })
 
@@ -59,21 +59,19 @@ client.connect(err => {
 
         ProductCollection.deleteOne({ _id: ObjectId(req.params.id) })
             .then((result) => {
-                console.log(result)
+                res.send(result.deletedCount > 0)
             })
     })
 
 
     app.patch("/update/:id", (req, res) => {
-        console.log(req.body.price)
         ProductCollection.updateOne({ _id: ObjectId(req.params.id) },
 
             {
-                $set: { price: req.body.price, quantity: req.body.quantity },
-                $currentDate: { lastModified: true }
+                $set: { price: req.body.price, quantity: req.body.quantity }
             })
-            .then((result) => {
-                console.log(result)
+            .then(result => {
+                res.send(result.modifiedCount > 0)
             })
     })
     // client.close();
