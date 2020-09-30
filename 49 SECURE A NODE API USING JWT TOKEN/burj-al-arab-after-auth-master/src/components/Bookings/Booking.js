@@ -20,12 +20,10 @@ const Booking = () => {
     }, [])
     return (
         <div>
-            {
-                console.log(bookings)
-            }
+
             {
                 bookings.map(book =>
-                    <li>{book.name} from: {(new Date(book.checkIn).toDateString('dd/MM/yyyy'))} to {(new Date(book.checkOut).toDateString('dd/MM/yyyy'))}</li>)
+                    <li kry={book._id}>{book.name} from: {(new Date(book.checkIn).toDateString('dd/MM/yyyy'))} to {(new Date(book.checkOut).toDateString('dd/MM/yyyy'))}</li>)
             }
         </div>
     );

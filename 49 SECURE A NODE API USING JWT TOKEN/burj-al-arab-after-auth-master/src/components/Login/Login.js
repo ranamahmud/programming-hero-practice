@@ -20,9 +20,9 @@ const Login = () => {
         firebase.auth().signInWithPopup(provider).then(function (result) {
             const { displayName, email } = result.user;
             const signedInUser = { name: displayName, email }
-            storeAuthToken();
             setLoggedInUser(signedInUser);
-            history.replace(from);
+            storeAuthToken();
+
             // ...
         }).catch(function (error) {
             const errorMessage = error.message;
@@ -35,6 +35,8 @@ const Login = () => {
             // Send token to your backend via HTTPS
             // ...
             sessionStorage.setItem('token', idToken);
+            history.replace(from);
+
 
         }).catch(function (error) {
             // Handle error
