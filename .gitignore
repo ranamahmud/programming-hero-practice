@@ -3,3 +3,11 @@
 .node_modules
 
 /47 NODE,Exprress,GET API,POST API,POSTMAN/node-mongo/node_modules
+
+49 SECURE A NODE API USING JWT TOKEN\burj-al-arab-server\burj-al-arab-a2d7d-firebase-adminsdk-qp4ki-870c0ceeb1.json
+
+\49 SECURE A NODE API USING JWT TOKEN\burj-al-arab-server\node_modules
+
+.env
+configs/
+/node_modules

@@ -11,6 +11,7 @@ import {
 import 'date-fns';
 import { Button } from '@material-ui/core';
 import { useState } from 'react';
+import Booking from '../Bookings/Booking';
 
 const Book = () => {
     const { bedType } = useParams();
@@ -35,7 +36,7 @@ const Book = () => {
     };
 
     const handleBooking = () => {
-        const newBooking = { ...loggedInUser, selectedDate }
+        const newBooking = { ...loggedInUser, ...selectedDate }
 
         fetch('http://localhost:5000/addBooking', {
             method: 'POST',
@@ -88,6 +89,7 @@ const Book = () => {
 </Button>
                 </MuiPickersUtilsProvider>
             </p>
+            <Booking />
         </div>
     );
 };
