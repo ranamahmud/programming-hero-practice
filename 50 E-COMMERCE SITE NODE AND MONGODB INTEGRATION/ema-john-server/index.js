@@ -11,6 +11,10 @@ require('dotenv').config()
 const MongoClient = require('mongodb').MongoClient;
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.jbp81.mongodb.net/${process.env.DB_NAME}>?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
+app.get('/', (req, res) => {
+    res.send("Hello Working db")
+})
 client.connect(err => {
     const productsCollection = client.db(process.env.DB_NAME).collection("products");
     const ordersCollection = client.db(process.env.DB_NAME).collection("orders");
