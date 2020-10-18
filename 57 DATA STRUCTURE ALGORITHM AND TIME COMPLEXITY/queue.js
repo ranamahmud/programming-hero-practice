@@ -20,8 +20,6 @@ premiks.enqueue('Dewan')
 premiks.enqueue('Prem')
 premiks.enqueue('Priya')
 console.log(premiks.queue)
-
-
 const winner = premiks.dequeue();
 console.log(winner);
 console.log(premiks.queue)
