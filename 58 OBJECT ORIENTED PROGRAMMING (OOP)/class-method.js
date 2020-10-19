@@ -11,8 +11,10 @@ class Hero {
         }
     }
 
-    goForGrocery() {
-        console.log(this.getPower());
+    goForGrocery(budget) {
+        if (this.power && budget > 1000) {
+            console.log(this.getPower());
+        }
 
         return 'Price is too high, i can not buy'
     }
